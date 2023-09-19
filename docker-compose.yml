@@ -1,0 +1,81 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: "rust-backend"
+    command: "cargo watch -x run"
+    build:
+      context: .
+      dockerfile: ./backend/dockerfile
+    tty: true
+    ports:
+      - "8888:8080"
+    volumes:
+      - ./backend:/app
+      - /app/target
+    environment:
+      TZ: 'Asia/Tokyo'
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    container_name: "react-frontend"
+    command: "npm run dev"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    tty: true
+    environment:
+      TZ: 'Asia/Tokyo'
+
+  web-server:
+    build:
+      context: .
+      dockerfile: ./nginx/dockerfile
+    container_name: "nginx-server"
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    tty: true
+    environment:
+      TZ: 'Asia/Tokyo'
+
+  db:
+    build:
+      context: .
+      dockerfile: ./db/dockerfile
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todoproject
+      MYSQL_USER: rust
+      MYSQL_PASSWORD: rust
+      TZ: 'Asia/Tokyo'
+    command: mysqld
+    volumes:
+      - database:/var/lib/mysql
+      - ./db/my.cnf:/etc/my.cnf
+    platform: linux/amd64
+    ports:
+      - 3306:3306
+    tty: true
+
+  adminer:
+    container_name: adminer
+    hostname: adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 9999:8080
+    depends_on:
+      - db
+    environment:
+      TZ: 'Asia/Tokyo'
+
+volumes:
+  database:

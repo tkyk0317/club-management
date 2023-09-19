@@ -1,0 +1,4 @@
+{
+  "cSpell.words": ["actix", "Datetime", "dotenv"],
+  "rust-analyzer.linkedProjects": ["./backend/migration/Cargo.toml"]
+}

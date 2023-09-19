@@ -1,0 +1,8 @@
+{
+  "name": "react-frontend",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "react-frontend",
+  "workspaceFolder": "/app",
+  "extensions": [],
+  "shutdownAction": "none"
+}

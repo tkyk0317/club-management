@@ -1,0 +1,8 @@
+{
+  "name": "rust-backend",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "rust-backend",
+  "workspaceFolder": "/app",
+  "extensions": [],
+  "shutdownAction": "none"
+}
