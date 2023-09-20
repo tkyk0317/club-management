@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import './App.css'
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login'
-import Todo from './components/Todo'
+import Login from '@app/components/Login'
+import Todo from '@app/components/Todo'
 import NotFound from './components/NotFound'
 
 export default function App() {

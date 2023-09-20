@@ -25,3 +25,7 @@ clippy:
 fmt:
 	docker exec -ti rust-backend cargo fmt
 
+.PHONY: front-test
+front-test:
+	docker exec -ti react-frontend npm test
+

@@ -19,8 +19,10 @@ const textFieldStyle = css({
 export default function Login() {
   const navigate = useNavigate();
 
-  const onClick = (): Promise<void> => {
-    return requestLogin(() => navigate("/todo"))
+  const onClick = async (): Promise<void> => {
+    return await requestLogin(() => {
+      navigate("/todo")
+    })
   }
 
   const icon = (): JSX.Element => {

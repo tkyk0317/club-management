@@ -1,4 +1,3 @@
-import React from 'react';
 import { forwardRef, SyntheticEvent } from 'react'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';

@@ -8,7 +8,7 @@ type Props = {
   message: string
   variant: string
   onClick: () => Promise<void>
-  icon: () => React.FC
+  icon: () => JSX.Element
   css?: any
 }
 

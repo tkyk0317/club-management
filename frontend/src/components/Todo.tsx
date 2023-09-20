@@ -63,10 +63,10 @@ export default function App() {
   const onCloseModalHandler = () => {
     setModalOpen(false);
   };
-  const icon = (): React.FC => {
+  const icon = (): JSX.Element => {
     return <SendIcon />;
   };
-  const todoArea = (): React.FC => {
+  const todoArea = (): JSX.Element => {
     return (
       <div>
         <TextField id="todo"

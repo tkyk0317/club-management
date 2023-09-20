@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -20,7 +19,7 @@ type Props = {
   onHandleClose: () => void
   title: string
   message: string
-  component?: () => React.FC
+  component?: () => JSX.Element
 }
 
 export default function BasicModal({
@@ -28,7 +27,7 @@ export default function BasicModal({
   onHandleClose,
   title,
   message,
-  component = (): React.FC => { return <span></span>; }
+  component = (): JSX.Element => { return <span></span>; }
 }: Props) {
   const parentComponent = component();
 

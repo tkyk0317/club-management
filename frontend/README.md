@@ -1,27 +1,30 @@
-# React + TypeScript + Vite
+# 部活管理WEBアプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+部活動を管理し、効率的に運営できるアプリを目指して作成します。
 
-Currently, two official plugins are available:
+## 使用言語
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* フロント
+  * React
+* サーバーサイド
+  * Rust(actix-web)
 
-## Expanding the ESLint configuration
+## 搭載予定機能
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+* ログイン機能
+  * Googleログイン
+* チャット機能
+  * 部活に所属しているメンバーにチャットできる
+* 練習ロギング・分析機能
+  * 練習した履歴を閲覧できる機能
+  * 練習した内容を分析し、より効率的な練習方法を提案できる機能
+* 試合などのスケジュール管理機能
+  * リマインド機能
+  * カレンダー機能
+* マイページ機能
+  * 自分が実施しなければならないものTodo管理できる
+  * 試合などの予定を管理できる機能
+* 動画アップロード機能
+* メンバー管理機能
+  * 所属メンバー
+  * 権限管理
