@@ -22,3 +22,9 @@ pub async fn create(c: web::Json<ClientUpdateTodo>) -> HttpResponse {
         }
     }
 }
+
+pub async fn update(todo: web::Json<todo::Model>) -> HttpResponse {
+    let todo = todo.update().await;
+
+    HttpResponse::Ok().json(todo.expect("Not found todo"))
+}

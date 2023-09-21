@@ -2,11 +2,11 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import ButtonUI from './ui/ButtonUI';
+import ButtonUI from '@app/components/ui/ButtonUI';
 import { css } from '@emotion/react'
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from "react-router-dom";
-import { requestLogin } from "../api/login";
+import { requestLogin } from "@app/api/login";
 
 const formStyle = css({
   width: "800px",

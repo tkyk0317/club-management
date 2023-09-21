@@ -6,13 +6,12 @@ pub fn config(cfg: &mut web::ServiceConfig) {
         web::scope("/api/todo").service(
             web::resource("")
                 .route(web::post().to(controllers::todo::api::create))
+                .route(web::put().to(controllers::todo::api::update))
                 .route(web::get().to(controllers::todo::api::get)),
-        )
+        ),
     )
     .service(
-        web::scope("/api/login").service(
-            web::resource("")
-                .route(web::post().to(controllers::login::api::login))
-        )
+        web::scope("/api/login")
+            .service(web::resource("").route(web::post().to(controllers::login::api::login))),
     );
 }

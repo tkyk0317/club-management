@@ -15,17 +15,31 @@ pub struct Model {
     pub id: i32,
     #[sea_orm(column_type = "Text")]
     pub content: String,
-    pub created_at: Option<DateTime>,
-    pub updated_at: Option<DateTime>,
+    pub created_at: DateTime,
+    pub updated_at: DateTime,
+}
+
+impl Model {
+    pub async fn update(&self) -> Result<Model, DbErr>{
+        let db = db::establish_connection().await?;
+        let todo = Entity::find_by_id(self.id)
+            .one(&db)
+            .await?;
+        let mut todo: ActiveModel = todo
+            .expect("[Todo::Model::update] Could not into")
+            .into();
+        todo.content = ActiveValue::Set(self.content.clone());
+        todo.update(&db).await
+    }
 }
 
 pub async fn get() -> Vec<Model> {
     let db = db::establish_connection().await;
     Entity::find()
         .order_by_desc(Column::CreatedAt)
-        .all(&db.unwrap())
+        .all(&db.expect("[Todo::Model::get] Could not refer db"))
         .await
-        .unwrap()
+        .expect("[Todo::Model::get] Could not await")
 }
 
 pub async fn insert(model: &UpdateTodo) -> Result<Model, DbErr> {
@@ -35,7 +49,7 @@ pub async fn insert(model: &UpdateTodo) -> Result<Model, DbErr> {
         ..Default::default()
     };
     let db = db::establish_connection().await;
-    todo.insert(&db.unwrap()).await
+    todo.insert(&db.expect("[Todo::Model::insert] Could not refer db")).await
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

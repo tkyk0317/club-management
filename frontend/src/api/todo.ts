@@ -34,3 +34,18 @@ export const requestGetTodo = async (
     console.log(e);
   }
 };
+
+export const requestUpdateTodo = async (
+  todo: Todo,
+  success: (data: Todo) => void
+): Promise<void> => {
+  try {
+    const res = await axios.put(
+      "http://localhost:8080/api/todo",
+      JSON.stringify(todo)
+    );
+    success(res.data);
+  } catch (e) {
+    console.log(e);
+  }
+};
