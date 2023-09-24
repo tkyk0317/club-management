@@ -10,9 +10,13 @@ actix-web="4"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0"
 futures = "0.3.21"
-sea-orm = { version = "0.12", features = [ "sqlx-mysql", "runtime-async-std-native-tls", "macros" ] }
+sea-orm = { version = "0.12", features = [ "sqlx-mysql", "runtime-async-std-native-tls", "macros", "mock" ] }
 env_logger = "0.10.0"
 log = "0.4.20"
 dotenv = "0.15.0"
 openssl-sys = "0.9.93"
 derive-getters = "0.3.0"
+
+[dev-dependencies]
+tokio = {version="^1.32.0", features=["test-util", "macros"]}
+chrono = "0.4.31"

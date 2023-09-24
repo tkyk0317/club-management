@@ -29,3 +29,6 @@ fmt:
 front-test:
 	docker exec -ti react-frontend npm test
 
+.PHONY: back-test
+back-test:
+	docker exec -ti rust-backend cargo test
