@@ -19,15 +19,15 @@ logs:
 
 .PHONY: migrate
 migrate:
-	docker exec -ti rust-backend sea-orm-cli migrate up
+	docker exec rust-backend sea-orm-cli migrate up
 
 .PHONY: back-build
 back-build:
-	docker exec -ti rust-backend cargo build
+	docker exec rust-backend cargo build
 
 .PHONY: clippy
 clippy:
-	docker exec -ti rust-backend cargo clippy
+	docker exec rust-backend cargo clippy
 
 .PHONY: fmt
 fmt:
@@ -35,8 +35,8 @@ fmt:
 
 .PHONY: front-test
 front-test:
-	docker exec -ti react-frontend npm test
+	docker-compose exec -T frontend npm test
 
 .PHONY: back-test
 back-test:
-	docker exec -ti rust-backend cargo test
+	docker exec rust-backend cargo test
