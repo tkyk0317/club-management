@@ -17,6 +17,10 @@ down:
 logs:
 	docker-compose logs
 
+.PHONY: migrate
+migrate:
+	docker exec -ti rust-backend sea-orm-cli migrate up
+
 .PHONY: clippy
 clippy:
 	docker exec -ti rust-backend cargo clippy

@@ -14,7 +14,7 @@ services:
       - ./backend:/app
       - /app/target
     environment:
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
 
   frontend:
     build:
@@ -29,7 +29,7 @@ services:
       - 3000:3000
     tty: true
     environment:
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
 
   web-server:
     build:
@@ -42,7 +42,7 @@ services:
       - ./nginx:/etc/nginx/conf.d
     tty: true
     environment:
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
 
   db:
     build:
@@ -55,14 +55,12 @@ services:
       MYSQL_DATABASE: todoproject
       MYSQL_USER: rust
       MYSQL_PASSWORD: rust
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
     command: mysqld
     volumes:
       - database:/var/lib/mysql
       - ./db/my.cnf:/etc/my.cnf
     platform: linux/amd64
-    ports:
-      - 3306:3306
     tty: true
 
   adminer:
@@ -75,7 +73,7 @@ services:
     depends_on:
       - db
     environment:
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
 
 volumes:
   database:
