@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Run Build
+        run: |
+          make build
+          make up
+          make back-build
+      - name: clippy
+        run: |
+          make clippy
+      - name: back test
+        run: make back-test
+      - name: front test
+        run: make front-test

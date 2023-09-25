@@ -21,6 +21,10 @@ logs:
 migrate:
 	docker exec -ti rust-backend sea-orm-cli migrate up
 
+.PHONY: back-build
+back-build:
+	docker exec -ti rust-backend cargo build
+
 .PHONY: clippy
 clippy:
 	docker exec -ti rust-backend cargo clippy
