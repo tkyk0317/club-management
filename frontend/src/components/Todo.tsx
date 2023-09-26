@@ -16,7 +16,7 @@ import {
 } from '../api/todo';
 import TextField from '@mui/material/TextField';
 import SnackBarUI from '@app/components/ui/SnackBarUI';
-import ButtonUI from '@app/components/ui/ButtonUI';
+import Button from '@mui/material/Button';
 import ModalUI from '@app/components/ui/ModalUI';
 import { css } from '@emotion/react';
 import { formatDateTime } from '@app/utils/date'
@@ -27,15 +27,15 @@ const buttonStyle = css({
 });
 
 export default function App() {
-  useEffect(() => {
-    requestGetTodo(setList);
-  }, [])
-
-  const [data, setList] = useState([])
+  const [data, setList] = useState<Array<Todo>>([])
   const [open, setOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [updateSnackBarOpen, setUpdateSnackBar] = useState(false)
   const [todo, setTodo] = useState("")
+
+  useEffect(() => {
+    requestGetTodo((data: Array<Todo>) => setList(data));
+  }, [])
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', cellClassName: 'id', width: 30 },
@@ -45,14 +45,14 @@ export default function App() {
       headerName: '作成日',
       cellClassName: 'created_at',
       width: 200,
-      valueFormatter: (params: object) => { return formatDateTime(params.value) }
+      valueFormatter: (params: any) => { return formatDateTime(params.value) }
     },
     {
       field: 'updated_at',
       headerName: '更新日',
       width: 200,
       cellClassName: 'updated_at',
-      valueFormatter: (params: object) => { return formatDateTime(params.value) }
+      valueFormatter: (params: any) => { return formatDateTime(params.value) }
     },
   ];
   const onSuccessCreateHandler = (todo: Todo): void => {
@@ -77,9 +77,6 @@ export default function App() {
   const onCloseModalHandler = () => {
     setModalOpen(false);
   };
-  const icon = (): JSX.Element => {
-    return <SendIcon />;
-  };
   const onCloseUpdateSnackBar = () => {
     setUpdateSnackBar(false);
   };
@@ -87,7 +84,7 @@ export default function App() {
 const onUpdatedRow = React.useCallback(
   (newRow: GridRowModel, _oldRow: GridRowModel) =>
     new Promise<GridRowModel>((_resolve, _reject) => {
-      requestUpdateTodo(newRow, () => setUpdateSnackBar(true))
+      requestUpdateTodo(newRow as Todo, () => setUpdateSnackBar(true))
     }),
   [],
 );
@@ -104,13 +101,14 @@ const todoArea = (): JSX.Element => {
         value={todo}
         onChange={(ev) => setTodo(ev.target.value)}
       />
-      <ButtonUI
+      <Button
         css={buttonStyle}
-        icon={icon}
-        message="登録"
+        endIcon={<SendIcon />}
         onClick={onRegisterHandler}
         variant={"contained"}
-      />
+      >
+      登録
+      </Button>
     </div>
   );
 }
@@ -136,12 +134,13 @@ return (
       message={"登録するToDoを入力してください"}
       component={todoArea}
     />
-    <ButtonUI
-      icon={icon}
-      message="登録"
+    <Button
+      endIcon={<SendIcon />}
       onClick={onClick}
       variant={"contained"}
-    />
+    >
+      登録
+    </Button>
     <SnackBarUI
       open={open}
       onHandleClose={onHandleClose}

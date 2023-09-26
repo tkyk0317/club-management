@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import ButtonUI from '@app/components/ui/ButtonUI';
 import { css } from '@emotion/react'
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from "react-router-dom";
 import { requestLogin } from "@app/api/login";
+import Button from '@mui/material/Button';
 
 const formStyle = css({
   width: "800px",
@@ -24,10 +23,6 @@ export default function Login() {
       navigate("/todo")
     })
   }
-
-  const icon = (): JSX.Element => {
-    return <SendIcon />;
-  };
 
   return (
     <div
@@ -56,12 +51,13 @@ export default function Login() {
             autoComplete="current-password"
           />
         </div>
-        <ButtonUI
+        <Button
           variant={"contained"}
-          icon={icon}
-          message={"ログイン"}
+          endIcon={<SendIcon />}
           onClick={onClick}
-        />
+        >
+          {"ログイン"}
+        </Button>
       </Box >
     </div>
   )

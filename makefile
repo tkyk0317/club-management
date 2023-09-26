@@ -21,6 +21,10 @@ logs:
 migrate:
 	docker exec rust-backend sea-orm-cli migrate up
 
+.PHONY: front-build
+front-build:
+	docker-compose exec -T frontend npm run build
+
 .PHONY: back-build
 back-build:
 	docker exec rust-backend cargo build

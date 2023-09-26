@@ -11,10 +11,10 @@ describe("ログインテスト", () => {
 
   test("ログイン成功", async () => {
     // mock
-    vi.mock('axios')
-    axios.post.mockResolvedValue({ status: 200 })
-    vi.mock('react-router-dom')
-    router.useNavigate.mockImplementation(() => {})
+    vi.mock('axios');
+    (axios.post as any).mockResolvedValue({ status: 200 });
+    vi.mock('react-router-dom');
+    (router.useNavigate as any).mockImplementation(() => { });
 
     // レンダー
     render(<Login />);
@@ -24,16 +24,16 @@ describe("ログインテスト", () => {
     await fireEvent.click(button);
 
     // 期待値確認
-    expect(axios.post).toHaveBeenCalledTimes(1)
-    expect(router.useNavigate).toHaveBeenCalled(1)
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(router.useNavigate).toHaveBeenCalled();
   });
 
   test("ログイン失敗", async () => {
     // mock
-    vi.mock('axios')
-    axios.post.mockResolvedValue({ status: 500 })
-    vi.mock('react-router-dom')
-    router.useNavigate.mockImplementation(() => {})
+    vi.mock('axios');
+    (axios.post as any).mockResolvedValue({ status: 500 });
+    vi.mock('react-router-dom');
+    (router.useNavigate as any).mockImplementation(() => { });
 
     // レンダー
     render(<Login />);
@@ -43,7 +43,7 @@ describe("ログインテスト", () => {
     await fireEvent.click(button);
 
     // 期待値確認
-    expect(axios.post).toHaveBeenCalledTimes(1)
-    expect(router.useNavigate).toHaveBeenCalled(0)
+    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(router.useNavigate).toHaveBeenCalled();
   });
 });
