@@ -12,6 +12,8 @@ jobs:
     steps:
       - run: sudo chown runner:docker /var/run/docker.sock
         if: ${{ env.ACT }}
+      - name: cleanup docker image
+        run: docker system prune -a -f --filter "until=24h"
       - name: checkout
         uses: actions/checkout@v2
       - name: pull image
