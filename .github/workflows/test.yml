@@ -6,28 +6,45 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
-  CI:
+  CI-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-
+      - run: sudo chown runner:docker /var/run/docker.sock
+        if: ${{ env.ACT }}
       - name: checkout
         uses: actions/checkout@v2
-      - name: Run Build
-        run: |
-          docker-compose pull
-          make build
-          make up
-          make back-build
+      - name: pull image
+        run: docker-compose pull db web-server backend
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: docker build
+        run: docker-compose build backend db web-server
+      - name: docker run
+        run: docker-compose up -d backend db web-server
+      - name: build
+        run: make back-build
       - name: clippy
-        run: |
-          make clippy
-      - name: back test
+        run: make clippy
+      - name: back-test
         run: make back-test
-      - name: front test
+
+  CI-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo chown runner:docker /var/run/docker.sock
+        if: ${{ env.ACT }}
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: pull image
+        run: docker-compose pull frontend
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: docker build
+        run: docker-compose build frontend
+      - name: docker run
+        run: docker-compose up -d frontend
+      - name: front-build
+        run: make front-build
+      - name: front-test
         run: make front-test

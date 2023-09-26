@@ -44,3 +44,7 @@ front-test:
 .PHONY: back-test
 back-test:
 	docker exec rust-backend cargo test
+
+.PHONY: act
+act:
+	act -b --container-architecture linux/amd64
