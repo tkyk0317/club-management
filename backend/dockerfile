@@ -11,3 +11,11 @@ RUN cargo install cargo-watch
 RUN cargo install sea-orm-cli
 RUN rustup component add clippy
 RUN rustup component add rustfmt
+
+COPY ./backend/src ./src
+COPY ./backend/migration ./migration
+COPY ./backend/.env ./.env
+COPY ./backend/Cargo.toml ./Cargo.toml
+COPY ./backend/Cargo.lock ./Cargo.lock
+
+RUN cargo build
