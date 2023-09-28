@@ -1,5 +1,5 @@
 import Todo from "@app/components/Todo";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import axios from 'axios';
 
 describe("Todo表示テスト", () => {
@@ -58,13 +58,13 @@ describe("Todo更新テスト", () => {
     });
 
     // レンダー
-    //const { container } = render(<Todo />);
+    const { container } = render(<Todo />);
 
     // Todo内容ダブルクリック後、情報を入力
-    //const content = container.getElementsByClassName('content');
-    //const grid = screen.getByRole('grid');
+    container.getElementsByClassName('content');
+    screen.getByRole('grid');
 
     // 期待値確認
-    //expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledTimes(1);
   });
 });
